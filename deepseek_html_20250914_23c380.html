@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveWall - Premium Live Wallpapers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, var(--darker), var(--dark));
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--light);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+            font-size: 32px;
+        }
+        
+        .logo span {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--light);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+        }
+        
+        /* Devices Section */
+        .devices {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .device {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px;
+            width: 200px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .device:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .device i {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .device-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .device-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Gallery Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 60px 0 40px;
+            color: var(--light);
+        }
+        
+        .section-title span {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .wallpaper {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .wallpaper:hover {
+            transform: scale(1.03);
+        }
+        
+        .wallpaper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .wallpaper:hover img {
+            transform: scale(1.1);
+        }
+        
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .wallpaper:hover .overlay {
+            opacity: 1;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature i {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+        
+        .feature p {
+            color: var(--gray);
+        }
+        
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .download-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--gray);
+        }
+        
+        .content-locker {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .content-locker p {
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: var(--gray);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .facebook:hover {
+            color: #3b5998 !important;
+        }
+        
+        .pinterest:hover {
+            color: #bd081c !important;
+        }
+        
+        .instagram:hover {
+            color: #e4405f !important;
+        }
+        
+        .youtube:hover {
+            color: #cd201f !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .device {
+                width: 160px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .device {
+                width: 140px;
+                padding: 15px;
+            }
+            
+            .device i {
+                font-size: 40px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .social-icons a {
+                margin: 0 10px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-film"></i>
+                <span>LiveWall</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#devices">Devices</a></li>
+                    <li><a href="#download">Download</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero" id="home">
+            <h1>Transform Your Device with Stunning Live Wallpapers</h1>
+            <p>Download high-quality, dynamic live wallpapers for all your devices. Regular updates with new content!</p>
+            <a href="#download" class="btn">Get Started</a>
+        </section>
+        
+        <section id="devices">
+            <h2 class="section-title">Supported <span>Devices</span></h2>
+            <div class="devices">
+                <div class="device">
+                    <i class="fab fa-apple"></i>
+                    <h3>iOS</h3>
+                    <p>iPhone & iPad</p>
+                    <a href="https://lockverify.net/cl/i/ve9gwd" class="device-btn">Download</a>
+                </div>
+                <div class="device">
+                    <i class="fab fa-android"></i>
+                    <h3>Android</h3>
+                    <p>Phones & Tablets</p>
+                    <a href="https://lockverify.net/cl/i/ve9gwd" class="device-btn">Download</a>
+                </div>
+                <div class="device">
+                    <i class="fab fa-windows"></i>
+                    <h3>Windows</h3>
+                    <p>PC & Laptops</p>
+                    <a href="https://lockverify.net/cl/i/ve9gwd" class="device-btn">Download</a>
+                </div>
+                <div class="device">
+                    <i class="fab fa-apple"></i>
+                    <h3>macOS</h3>
+                    <p>Mac Computers</p>
+                    <a href="https://lockverify.net/cl/i/ve9gwd" class="device-btn">Download</a>
+                </div>
+                <div class="device">
+                    <i class="fab fa-linux"></i>
+                    <h3>Linux</h3>
+                    <p>Desktop & Mobile</p>
+                    <a href="https://lockverify.net/cl/i/ve9gwd" class="device-btn">Download</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gallery">
+            <h2 class="section-title">Featured <span>Wallpapers</span></h2>
+            <div class="gallery">
+                <div class="wallpaper">
+                    <img src="https://images.unsplash.com/photo-1536431311719-398b6704d4cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="Abstract Liquid">
+                    <div class="overlay">
+                        <h3>Abstract Liquid</h3>
+                    </div>
+                </div>
+                <div class="wallpaper">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="Nebula">
+                    <div class="overlay">
+                        <h3>Cosmic Nebula</h3>
+                    </div>
+                </div>
+                <div class="wallpaper">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="Northern Lights">
+                    <div class="overlay">
+                        <h3>Northern Lights</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <i class="fas fa-sync"></i>
+                <h3>Regular Updates</h3>
+                <p>New wallpapers added every week to keep your device fresh and exciting.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-battery-full"></i>
+                <h3>Optimized Performance</h3>
+                <p>Designed to use minimal battery while providing stunning visuals.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>All Resolutions</h3>
+                <p>Perfectly optimized for all screen sizes and device types.</p>
+            </div>
+        </section>
+        
+        <section id="download" class="download-section">
+            <h2>Download Now</h2>
+            <p>Click the button below to access our premium live wallpapers</p>
+            
+            <div class="content-locker">
+                <p>To unlock the download, please complete a quick verification step.</p>
+                <a href="https://lockverify.net/cl/i/ve9gwd" class="btn btn-secondary">
+                    <i class="fas fa-lock"></i> Unlock Download
+                </a>
+                <p class="small">By verifying, you help us keep the content free for everyone.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/motion.wallpapers" class="facebook" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.pinterest.com/livewallpapers4free/" class="pinterest" target="_blank">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+                <a href="https://www.instagram.com/motion.wallpapers/" class="instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@motion-walls" class="youtube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <p>&copy; 2023 LiveWall. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Active menu highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animation for elements on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.device, .feature, .wallpaper');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = 1;
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Initialize elements for animation
+            const animatedElements = document.querySelectorAll('.device, .feature, .wallpaper');
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            // Trigger once on load
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
